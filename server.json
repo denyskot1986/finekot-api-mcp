@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.denyskot1986/finekot-api-mcp",
+  "title": "Finekot API",
+  "description": "89 pay-per-call tools for agents: screenshots, scraping, PDF, OCR, TTS, STT, invoices, KYC, utils",
+  "version": "0.1.0",
+  "websiteUrl": "https://api.finekot.com",
+  "repository": {
+    "url": "https://github.com/denyskot1986/finekot-api-mcp",
+    "source": "github",
+    "id": "REPO_ID"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.finekot.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer token. Get a key with EUR 1 free credit: POST https://api.finekot.com/v1/keys {\"email\": \"...\"}",
+          "isRequired": true,
+          "isSecret": true,
+          "value": "Bearer {api_key}",
+          "variables": {
+            "api_key": {
+              "description": "Finekot API key (fk_live_...)",
+              "isRequired": true,
+              "isSecret": true,
+              "placeholder": "fk_live_..."
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

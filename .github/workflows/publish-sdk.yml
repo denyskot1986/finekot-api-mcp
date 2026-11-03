@@ -1,0 +1,52 @@
+name: Publish SDKs
+
+# Trusted publishing (OIDC) for both registries; no long-lived tokens.
+# One-time setup on the registry side is required before the first run:
+#   PyPI: account → Publishing → add pending publisher
+#         owner denyskot1986, repository finekot-api-mcp,
+#         workflow publish-sdk.yml, environment pypi, project finekot
+#   npm:  package finekot-api → Settings → Trusted Publisher → GitHub Actions
+#         owner denyskot1986, repository finekot-api-mcp, workflow publish-sdk.yml
+#         (the package must exist on npm before a trusted publisher can be added)
+
+on:
+  push:
+    tags: ["sdk-v*"]
+  workflow_dispatch:
+
+jobs:
+  pypi:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build
+        working-directory: sdk/python
+        run: |
+          python -m pip install --upgrade build
+          python -m build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: sdk/python/dist
+
+  npm:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+      - name: Publish to npm
+        working-directory: sdk/node
+        run: npm publish --access public

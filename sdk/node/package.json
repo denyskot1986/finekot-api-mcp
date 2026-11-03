@@ -1,0 +1,43 @@
+{
+  "name": "finekot-api",
+  "version": "0.1.0",
+  "description": "Client for the Finekot API: 89 pay-per-call services for AI agents (screenshots, scraping, PDF, OCR, TTS, STT, invoices, KYC).",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "finekot",
+    "api",
+    "mcp",
+    "agents",
+    "screenshot",
+    "scraping",
+    "pdf",
+    "ocr",
+    "tts",
+    "stt"
+  ],
+  "homepage": "https://api.finekot.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denyskot1986/finekot-api-mcp.git",
+    "directory": "sdk/node"
+  },
+  "bugs": {
+    "url": "https://github.com/denyskot1986/finekot-api-mcp/issues"
+  },
+  "license": "MIT",
+  "author": "Finekot Systems",
+  "publishConfig": {
+    "access": "public"
+  }
+}
